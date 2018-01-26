@@ -32,3 +32,6 @@ HEADERS += \
 
 FORMS += \
         tabuleirowindow.ui
+
+RESOURCES += \
+    recurso.qrc

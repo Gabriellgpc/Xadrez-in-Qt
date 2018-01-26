@@ -2,6 +2,7 @@
 #define TABULEIROWINDOW_H
 
 #include <QWidget>
+#include <QPainter>
 
 namespace Ui {
 class TabuleiroWindow;
@@ -15,6 +16,8 @@ public:
     explicit TabuleiroWindow(QWidget *parent = 0);
     ~TabuleiroWindow();
 
+protected:
+    void paintEvent(QPaintEvent *event);
 private:
     Ui::TabuleiroWindow *ui;
 };

@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>tabuleiro.png</file>
+    </qresource>
+</RCC>

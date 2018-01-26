@@ -1,6 +1,9 @@
 #include "tabuleirowindow.h"
 #include "ui_tabuleirowindow.h"
 
+
+using namespace std;
+
 TabuleiroWindow::TabuleiroWindow(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TabuleiroWindow)
@@ -11,4 +14,14 @@ TabuleiroWindow::TabuleiroWindow(QWidget *parent) :
 TabuleiroWindow::~TabuleiroWindow()
 {
     delete ui;
+}
+
+void TabuleiroWindow::paintEvent(QPaintEvent *event)
+{
+    QPainter paint(this);
+    paint.drawRect(0,0,100,100);
+    paint.setBrush(Qt::blue);
+
+    //paint.drawPixmap(0,0,100,100,QPixmap("://tabuleiro.png"));
+    //TabuleiroWindow::paintEvent(event);
 }
