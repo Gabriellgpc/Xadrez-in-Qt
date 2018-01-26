@@ -34,11 +34,11 @@ class Ui_MainWindow
 public:
     QWidget *centralWidget;
     QTableWidget *tabuleiro;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout_2;
     QLabel *label;
     QTableView *tableViewHistorico;
-    QWidget *widget1;
+    QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout;
     QTableView *viewChat;
     QHBoxLayout *horizontalLayout;
@@ -66,9 +66,12 @@ public:
         tabuleiro->setGeometry(QRect(0, 0, 500, 500));
         tabuleiro->setMinimumSize(QSize(500, 500));
         tabuleiro->setMaximumSize(QSize(500, 500));
+        tabuleiro->setFrameShape(QFrame::Box);
+        tabuleiro->setFrameShadow(QFrame::Raised);
+        tabuleiro->setLineWidth(1);
         tabuleiro->setRowCount(8);
         tabuleiro->setColumnCount(8);
-        tabuleiro->horizontalHeader()->setVisible(false);
+        tabuleiro->horizontalHeader()->setVisible(true);
         tabuleiro->horizontalHeader()->setDefaultSectionSize(62);
         tabuleiro->horizontalHeader()->setHighlightSections(false);
         tabuleiro->horizontalHeader()->setMinimumSectionSize(62);
@@ -76,15 +79,15 @@ public:
         tabuleiro->verticalHeader()->setDefaultSectionSize(62);
         tabuleiro->verticalHeader()->setHighlightSections(false);
         tabuleiro->verticalHeader()->setMinimumSectionSize(62);
-        widget = new QWidget(centralWidget);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(520, 20, 213, 205));
-        verticalLayout_2 = new QVBoxLayout(widget);
+        layoutWidget = new QWidget(centralWidget);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(520, 20, 213, 205));
+        verticalLayout_2 = new QVBoxLayout(layoutWidget);
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setContentsMargins(11, 11, 11, 11);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(widget);
+        label = new QLabel(layoutWidget);
         label->setObjectName(QStringLiteral("label"));
         QFont font;
         font.setPointSize(10);
@@ -93,22 +96,22 @@ public:
 
         verticalLayout_2->addWidget(label);
 
-        tableViewHistorico = new QTableView(widget);
+        tableViewHistorico = new QTableView(layoutWidget);
         tableViewHistorico->setObjectName(QStringLiteral("tableViewHistorico"));
         tableViewHistorico->setMinimumSize(QSize(211, 181));
         tableViewHistorico->setMaximumSize(QSize(211, 181));
 
         verticalLayout_2->addWidget(tableViewHistorico);
 
-        widget1 = new QWidget(centralWidget);
-        widget1->setObjectName(QStringLiteral("widget1"));
-        widget1->setGeometry(QRect(520, 240, 216, 261));
-        verticalLayout = new QVBoxLayout(widget1);
+        layoutWidget1 = new QWidget(centralWidget);
+        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(520, 240, 216, 261));
+        verticalLayout = new QVBoxLayout(layoutWidget1);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        viewChat = new QTableView(widget1);
+        viewChat = new QTableView(layoutWidget1);
         viewChat->setObjectName(QStringLiteral("viewChat"));
         viewChat->setMinimumSize(QSize(214, 228));
         viewChat->setMaximumSize(QSize(214, 228));
@@ -118,12 +121,12 @@ public:
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setSpacing(6);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        ButtonEnviar = new QPushButton(widget1);
+        ButtonEnviar = new QPushButton(layoutWidget1);
         ButtonEnviar->setObjectName(QStringLiteral("ButtonEnviar"));
 
         horizontalLayout->addWidget(ButtonEnviar);
 
-        lineEditMensagem = new QLineEdit(widget1);
+        lineEditMensagem = new QLineEdit(layoutWidget1);
         lineEditMensagem->setObjectName(QStringLiteral("lineEditMensagem"));
 
         horizontalLayout->addWidget(lineEditMensagem);
@@ -132,13 +135,9 @@ public:
         verticalLayout->addLayout(horizontalLayout);
 
         MainWindow->setCentralWidget(centralWidget);
+        layoutWidget->raise();
+        layoutWidget->raise();
         tabuleiro->raise();
-        tableViewHistorico->raise();
-        label->raise();
-        viewChat->raise();
-        lineEditMensagem->raise();
-        ButtonEnviar->raise();
-        tableViewHistorico->raise();
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 740, 21));

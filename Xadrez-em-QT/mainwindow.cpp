@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include <QLabel>
-
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     QLabel *cell;
-    bool alt = 0;
+    bool alt = 1;
 
     for(int i = 0; i < 8; i++)
     {
@@ -34,4 +34,9 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::on_tabuleiro_cellClicked(int row, int column)
+{
+    qDebug() << row << "," << column;
 }
