@@ -1,12 +1,11 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
-
+#include "tabuleiro.h"
+#include "ui_tabuleiro.h"
 #include <QLabel>
-#include <QDebug>
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+
+Tabuleiro::Tabuleiro(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::Tabuleiro)
 {
     ui->setupUi(this);
 
@@ -24,19 +23,16 @@ MainWindow::MainWindow(QWidget *parent) :
            else
                cell->setStyleSheet("QLabel{background : rgb(139,59,54)}");
            alt = !alt;
+           cell->setPixmap(QPixmap(":/new/imgs/imagens/bishop_black.svg"));
         }
         alt = !alt;
     }
 
 
+
 }
 
-MainWindow::~MainWindow()
+Tabuleiro::~Tabuleiro()
 {
     delete ui;
-}
-
-void MainWindow::on_tabuleiro_cellClicked(int row, int column)
-{
-    qDebug() << row << "," << column;
 }

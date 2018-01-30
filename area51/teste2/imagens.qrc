@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/new/imgs">
+        <file>imagens/bishop_black.svg</file>
+        <file>imagens/bishop_white.svg</file>
+        <file>imagens/exp.png</file>
+        <file>imagens/king_black.svg</file>
+        <file>imagens/king_white.svg</file>
+        <file>imagens/knight_black.svg</file>
+        <file>imagens/knight_white.svg</file>
+        <file>imagens/pawn_black.svg</file>
+        <file>imagens/pawn_white.svg</file>
+        <file>imagens/profile.png</file>
+        <file>imagens/queen_black.svg</file>
+        <file>imagens/queen_white.svg</file>
+        <file>imagens/rook_black.svg</file>
+        <file>imagens/rook_white.svg</file>
+        <file>imagens/tabuleiro.png</file>
+    </qresource>
+</RCC>

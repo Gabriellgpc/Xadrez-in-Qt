@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2018-01-25T20:59:57
+# Project created by QtCreator 2018-01-30T11:48:55
 #
 #-------------------------------------------------
 
@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = Xadrez-em-QT
+TARGET = teste2
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -25,10 +25,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    tabuleiro.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    tabuleiro.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    tabuleiro.ui
+
+RESOURCES += \
+    imagens.qrc
