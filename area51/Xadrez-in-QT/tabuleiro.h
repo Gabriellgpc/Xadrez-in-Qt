@@ -3,11 +3,10 @@
 
 #include <QWidget>
 #include <cell.h>
+
 namespace Ui {
 class Tabuleiro;
 }
-
-
 
 class Tabuleiro : public QWidget
 {

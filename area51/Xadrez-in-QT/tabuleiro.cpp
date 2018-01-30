@@ -4,14 +4,11 @@
 #include <QLabel>
 #include <QDebug>
 
-
 Tabuleiro::Tabuleiro(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Tabuleiro)
 {
     ui->setupUi(this);
-
-
 
     //Cell *cell;
     bool alt = 1;
@@ -41,8 +38,6 @@ void Tabuleiro::organiza()
 
     }
 }
-
-
 
 Tabuleiro::~Tabuleiro()
 {
