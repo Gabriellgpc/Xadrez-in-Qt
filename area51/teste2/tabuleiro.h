@@ -7,8 +7,6 @@ namespace Ui {
 class Tabuleiro;
 }
 
-
-
 class Tabuleiro : public QWidget
 {
     Q_OBJECT
