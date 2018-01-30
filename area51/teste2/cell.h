@@ -13,7 +13,6 @@ private:
     QPixmap pic;
     Peca peca;
     CorPeca cor;
-
 public:
     explicit Cell(QWidget *parent = nullptr);
 

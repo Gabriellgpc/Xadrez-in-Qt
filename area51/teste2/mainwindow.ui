@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>51</x>
@@ -53,12 +53,6 @@
      </item>
     </layout>
    </widget>
-   <zorder>tab</zorder>
-   <zorder>listWidget</zorder>
-   <zorder>label</zorder>
-   <zorder></zorder>
-   <zorder>label</zorder>
-   <zorder>label_2</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -85,7 +79,7 @@
   <customwidget>
    <class>Tabuleiro</class>
    <extends>QWidget</extends>
-   <header>tabuleiro.h</header>
+   <header location="global">tabuleiro.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
