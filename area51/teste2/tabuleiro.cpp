@@ -1,6 +1,8 @@
 #include "tabuleiro.h"
 #include "ui_tabuleiro.h"
+
 #include <QLabel>
+#include <QDebug>
 
 
 Tabuleiro::Tabuleiro(QWidget *parent) :
@@ -9,28 +11,35 @@ Tabuleiro::Tabuleiro(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QLabel *cell;
-    bool alt = 1;
 
+
+    //Cell *cell;
+    bool alt = 1;
     for(int i = 0; i < 8; i++)
     {
         for(int j = 0; j < 8; j++)
         {
-           ui->tabuleiro->setCellWidget(i,j,new QLabel);
-           cell = (QLabel*)ui->tabuleiro->cellWidget(i,j);
+           ui->tabuleiro->setCellWidget(i,j,&tab[i][j]);
+           //cell = (Cell*)ui->tabuleiro->cellWidget(i,j);
            if(alt)
-               cell->setStyleSheet("QLabel{background : rgb(252,252,252)}");
+               tab[i][j].setStyleSheet("QLabel{background : rgb(252,252,252)}");
            else
-               cell->setStyleSheet("QLabel{background : rgb(139,59,54)}");
+               tab[i][j].setStyleSheet("QLabel{background : rgb(30,30,30)}");
            alt = !alt;
-           cell->setPixmap(QPixmap(":/new/imgs/imagens/bishop_black.svg"));
+           //cell->setText("HEY");
+           //cell->setPixmap(QPixmap(":/new/imgs/imagens/bishop_black.svg"));
         }
         alt = !alt;
     }
+}
 
+void Tabuleiro::organiza()
+{   //organiza o tabuleiro
 
 
 }
+
+
 
 Tabuleiro::~Tabuleiro()
 {

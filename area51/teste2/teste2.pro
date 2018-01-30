@@ -26,11 +26,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    tabuleiro.cpp
+    tabuleiro.cpp \
+    jogox.cpp \
+    cell.cpp
 
 HEADERS += \
         mainwindow.h \
-    tabuleiro.h
+    tabuleiro.h \
+    jogox.h \
+    cell.h
 
 FORMS += \
         mainwindow.ui \

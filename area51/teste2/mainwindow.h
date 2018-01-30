@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include "jogox.h"
 namespace Ui {
 class MainWindow;
 }
@@ -17,6 +17,8 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    JogoX Game;
+
 };
 
 #endif // MAINWINDOW_H
