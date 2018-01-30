@@ -1,0 +1,12 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\tabuleiro.o
+./release\jogox.o
+./release\cell.o
+./release\qrc_imagens.o
+./release\qrc_images.o
+./release\moc_mainwindow.o
+./release\moc_tabuleiro.o
+./release\moc_cell.o
+);

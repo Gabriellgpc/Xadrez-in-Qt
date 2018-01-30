@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/new/imgs">
+    <qresource prefix="/">
         <file>imagens/bishop_black.svg</file>
         <file>imagens/bishop_white.svg</file>
         <file>imagens/exp.png</file>

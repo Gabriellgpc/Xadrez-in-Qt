@@ -41,4 +41,4 @@ FORMS += \
     tabuleiro.ui
 
 RESOURCES += \
-    imagens.qrc
+    images.qrc

@@ -35,8 +35,11 @@ Tabuleiro::Tabuleiro(QWidget *parent) :
 
 void Tabuleiro::organiza()
 {   //organiza o tabuleiro
+    for(int i=0;i<8;i++){
+        tab[1][i].setPeca(Peca::PEAO,PRETA);
+        tab[6][i].setPeca(Peca::PEAO,BRANCA);
 
-
+    }
 }
 
 

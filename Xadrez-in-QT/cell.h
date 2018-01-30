@@ -16,6 +16,7 @@ private:
 
 public:
     explicit Cell(QWidget *parent = nullptr);
+    void setPeca(Peca p,CorPeca c);
 
 signals:
 

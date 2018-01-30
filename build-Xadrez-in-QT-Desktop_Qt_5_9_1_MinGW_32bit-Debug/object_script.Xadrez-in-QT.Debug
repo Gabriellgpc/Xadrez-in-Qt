@@ -1,0 +1,12 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\tabuleiro.o
+./debug\jogox.o
+./debug\cell.o
+./debug\qrc_imagens.o
+./debug\qrc_images.o
+./debug\moc_mainwindow.o
+./debug\moc_tabuleiro.o
+./debug\moc_cell.o
+);
