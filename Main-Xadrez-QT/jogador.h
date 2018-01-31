@@ -21,6 +21,8 @@ public:
     //Retorna se a jogada foi valida
     bool jogada();
 
+    void setCorPeca(COR corPeca);
+
 };
 
 #endif // JOGADOR_H

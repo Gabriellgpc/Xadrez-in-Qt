@@ -3,7 +3,7 @@
 
 enum TIPOPECA{NADA,PEAO,RAINHA,TORRE,CAVALO,BISPO,REI};
 
-enum COR{PRETO,BRANCO};
+enum COR{NONE,PRETO,BRANCO};
 
 //classe polimorfica
 class Peca
@@ -13,9 +13,10 @@ private:
     TIPOPECA tipo;
     unsigned movimentos;
 public:
-    Peca();
-
-    virtual void move();
+    Peca(TIPOPECA tipo = NADA,COR cor = NONE);
+    int getTipo();
+    void setTipoCor(TIPOPECA tipo,COR cor);
+    void move();
 };
 
 class Peca_Rei: public Peca

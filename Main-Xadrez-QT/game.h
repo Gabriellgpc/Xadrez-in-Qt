@@ -8,11 +8,14 @@
 #define TAM_TAB 8
 #define MAX_PLAYER 2
 
+
+
 class game
 {
 private:
-    TIPOPECA Tab[TAM_TAB][TAM_TAB];
+    Peca Tab[TAM_TAB][TAM_TAB];
     Jogador player[MAX_PLAYER];
+    unsigned numJogos;//numero de partidas jogadas nessa instacia de jogo
     //Criar uma classe jogada ?
     //stack<Jogada>
 public:
