@@ -34,7 +34,7 @@ public:
 class Peca_Rei: public Peca
 {
 public:
-    Peca_Rei() { Peca(1) };
+    inline Peca_Rei() { Peca(REI); }
     ~Peca_Rei();
 
 
@@ -44,12 +44,17 @@ public:
 class Peca_Rainha:public Peca
 {
 public:
+    inline Peca_Rainha() { Peca(RAINHA); }
+    ~Peca_Rainha();
+
     void move();
 };
 
 class Peca_Peao:public Peca
 {
 public:
+    inline Peca_Peao() { Peca(PEAO); }
+    ~Peca_Peao();
 
     void promover();
     void move();
@@ -58,18 +63,27 @@ public:
 class Peca_Torre:public Peca
 {
 public:
+    inline Peca_Torre() { Peca(TORRE); }
+    ~Peca_Torre();
+
     void move();
 };
 
 class Peca_Cavalo:public Peca
 {
 public:
+    inline Peca_Cavalo() { Peca(CAVALO); }
+    ~Peca_Cavalo();
+
     void move();
 };
 
 class Peca_Bispo:public Peca
 {
 public:
+    inline Peca_Bispo() { Peca(BISPO); }
+    ~Peca_Bispo();
+
     void move();
 };
 
