@@ -13,9 +13,10 @@ private:
     COR cor_pecas;
     string nome;
     stack<TIPOPECA> Capturas;
+    unsigned count_move;
 public:
-    Jogador();
-
+    Jogador():count_move(0),Capturas(),cor_pecas(NONE),nome("") {}
+    Jogador(string Nome,COR cor): nome(Nome),cor_pecas(cor) {}
     //Retorna permissao para passar a vez
     bool passar_vez();
     //Retorna se a jogada foi valida

@@ -8,8 +8,6 @@
 #define TAM_TAB 8
 #define MAX_PLAYER 2
 
-
-
 class game
 {
 private:
