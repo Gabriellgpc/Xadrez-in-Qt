@@ -18,14 +18,15 @@ protected:
 public:
     Peca(): cor(NONE),tipo(VAZIO){ pos[0]=9; pos[1]=9; }
     Peca(TIPOPECA tipo_peca): tipo(tipo_peca) {}
+    Peca(TIPOPECA tipo_peca,COR cor): tipo(tipo_peca),cor(cor) {}
     virtual ~Peca();
 
-    virtual ptr_peca clone();
+    virtual ptr_peca clone() = 0;
 
-    inline TIPOPECA getTipo() { return tipo; }
-    inline void setTipo();
+    inline TIPOPECA getTipo() const { return tipo; }
+    inline void setTipo(TIPOPECA Tipo) { tipo = Tipo;}
 
-    void setCor(COR color) { cor = color; }
+    void setCor(COR cor) { cor = cor; }
     inline COR getCor() { return cor; }
 
     //Este metodo so deve ser usado por um objeto do tipo Tabuleiro
@@ -36,17 +37,19 @@ public:
     //Este metodo testa se a peca pode se movimentar para a posicao lin,col
     //caso seja possivel ele retorna true e realiza o movimento, caso contrario
     //apenas retorna false
-    virtual bool move(unsigned lin,unsigned col);
+    virtual bool move(unsigned lin,unsigned col) = 0;
     //Este metodo retorna true caso o movimento da peca para a posicao lin,col
     //seja possivel, ou false caso contrario
-    virtual bool test_move(unsigned lin, unsigned col);
+    virtual bool test_move(unsigned lin, unsigned col) = 0;
 
+    inline bool operator==(TIPOPECA Peca) { return tipo == Peca; }
 };
 
 class Peca_Rei: public Peca
 {
 public:
     inline Peca_Rei() { Peca(REI); }
+    inline Peca_Rei(COR cor) { Peca(REI,cor); }
     ~Peca_Rei();
 
     virtual ptr_peca clone() { return new Peca_Rei(*this); }
@@ -58,6 +61,7 @@ class Peca_Rainha:public Peca
 {
 public:
     inline Peca_Rainha() { Peca(RAINHA); }
+    inline Peca_Rei(COR cor) { Peca(RAINHA,cor); }
     ~Peca_Rainha();
 
     virtual ptr_peca clone() { return new Peca_Rainha(*this); }
@@ -69,6 +73,7 @@ class Peca_Peao:public Peca
 {
 public:
     inline Peca_Peao() { Peca(PEAO); }
+    inline Peca_Rei(COR cor) { Peca(PEAO,cor); }
     ~Peca_Peao();
 
     void promover();
@@ -82,6 +87,7 @@ class Peca_Torre:public Peca
 {
 public:
     inline Peca_Torre() { Peca(TORRE); }
+    inline Peca_Rei(COR cor) { Peca(TORRE,cor); }
     ~Peca_Torre();
 
     virtual ptr_peca clone() { return new Peca_Torre(*this); }
@@ -93,6 +99,7 @@ class Peca_Cavalo:public Peca
 {
 public:
     inline Peca_Cavalo() { Peca(CAVALO); }
+    inline Peca_Rei(COR cor) { Peca(CAVALO,cor); }
     ~Peca_Cavalo();
 
     virtual ptr_peca clone() { return new Peca_Cavalo(*this); }
@@ -104,6 +111,7 @@ class Peca_Bispo:public Peca
 {
 public:
     inline Peca_Bispo() { Peca(BISPO); }
+    inline Peca_Rei(COR cor) { Peca(BISPO,cor); }
     ~Peca_Bispo();
 
     virtual ptr_peca clone() { return new Peca_Bispo(*this); }

@@ -18,3 +18,5 @@ void Peca::setTipoCor(TIPOPECA tipo, COR cor)
     this->tipo = tipo;
     this->cor = cor;
 }
+
+
