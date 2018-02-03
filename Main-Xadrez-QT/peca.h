@@ -1,6 +1,11 @@
 #ifndef PECA_H
 #define PECA_H
 
+#include <list>
+#include "game.h"
+
+#define ERRO 666
+
 enum TIPOPECA{VAZIO,PEAO,RAINHA,TORRE,CAVALO,BISPO,REI};
 
 enum COR{NONE,PRETO,BRANCO};
@@ -8,15 +13,36 @@ enum COR{NONE,PRETO,BRANCO};
 class Peca;
 typedef Peca* ptr_peca;
 
+class casa
+{
+private:
+    //coordenadas
+    unsigned hor;
+    unsigned ver;
+public:
+    casa(unsigned H,unsigned V); // coordenada invalida no jogo
+
+    unsigned getHor()const {return hor; }
+    bool setHor(unsigned H);
+
+    unsigned getVer()const {return ver; }
+    bool setVer(unsigned V);
+    /*
+    friend class Peca;
+    friend class game;
+    */
+};
+
 //classe polimorfica
 class Peca
 {
 protected:
     COR cor;
     TIPOPECA tipo;
-    unsigned pos[2];//Posicao atual da peca
+    casa pos;//Posicao atual da peca
+    unsigned count_move;
 public:
-    Peca(): cor(NONE),tipo(VAZIO){ pos[0]=9; pos[1]=9; }
+    //Peca(): cor(NONE),tipo(VAZIO), count_move(0),pos(){ }
     Peca(TIPOPECA tipo_peca): tipo(tipo_peca) {}
     Peca(TIPOPECA tipo_peca,COR cor): tipo(tipo_peca),cor(cor) {}
     virtual ~Peca();
@@ -27,22 +53,27 @@ public:
     inline void setTipo(TIPOPECA Tipo) { tipo = Tipo;}
 
     void setCor(COR cor) { cor = cor; }
-    inline COR getCor() { return cor; }
+    inline COR getCor() const{ return cor; }
 
     //Este metodo so deve ser usado por um objeto do tipo Tabuleiro
     //A peca eh posicionada na posicao lin,col sem realizacao de testes
-    void setPos(unsigned lin, unsigned col);
-    void getPos(unsigned out_pos[]);
+    //Retorna true se a alteracao deu certo,false caso contrario
+    bool setPos(casa CASA);
+    inline casa getPos() const{ return pos; }
 
-    //Este metodo testa se a peca pode se movimentar para a posicao lin,col
+    //Este metodo testa se a peca pode se movimentar para a casa destino
     //caso seja possivel ele retorna true e realiza o movimento, caso contrario
     //apenas retorna false
-    virtual bool move(unsigned lin,unsigned col) = 0;
-    //Este metodo retorna true caso o movimento da peca para a posicao lin,col
+    /** virtual bool move(unsigned lin,unsigned col) = 0; */ //este metodo sera removido
+
+    //Este metodo retorna true caso o movimento da peca para a casa destino
     //seja possivel, ou false caso contrario
-    virtual bool test_move(unsigned lin, unsigned col) = 0;
+    virtual bool valid_move(casa CASA)const = 0;
+    //Preenche a lista de possiveis_mov
+    virtual list<casa> &movimentos()const = 0;
 
     inline bool operator==(TIPOPECA Peca) { return tipo == Peca; }
+
 };
 
 class Peca_Rei: public Peca
@@ -52,9 +83,9 @@ public:
     inline Peca_Rei(COR cor) { Peca(REI,cor); }
     ~Peca_Rei();
 
-    virtual ptr_peca clone() { return new Peca_Rei(*this); }
-    bool move(unsigned lin,unsigned col);
-    bool test_move(unsigned lin, unsigned col);
+    ptr_peca clone() { return new Peca_Rei(*this); }
+    list<casa> &movimentos()const;
+    bool valid_move(casa CASA);
 };
 
 class Peca_Rainha:public Peca
@@ -64,9 +95,9 @@ public:
     inline Peca_Rei(COR cor) { Peca(RAINHA,cor); }
     ~Peca_Rainha();
 
-    virtual ptr_peca clone() { return new Peca_Rainha(*this); }
-    bool move(unsigned lin,unsigned col);
-    bool test_move(unsigned lin, unsigned col);
+    ptr_peca clone() { return new Peca_Rainha(*this); }
+    list<casa> &movimentos()const;
+    bool valid_move(casa CASA);
 };
 
 class Peca_Peao:public Peca
@@ -78,9 +109,9 @@ public:
 
     void promover();
 
-    virtual ptr_peca clone() { return new Peca_Peao(*this); }
-    bool move(unsigned lin,unsigned col);
-    bool test_move(unsigned lin, unsigned col);
+    ptr_peca clone() { return new Peca_Peao(*this); }
+    list<casa> &movimentos()const;
+    bool valid_move(casa CASA);
 };
 
 class Peca_Torre:public Peca
@@ -90,9 +121,9 @@ public:
     inline Peca_Rei(COR cor) { Peca(TORRE,cor); }
     ~Peca_Torre();
 
-    virtual ptr_peca clone() { return new Peca_Torre(*this); }
-    bool move(unsigned lin,unsigned col);
-    bool test_move(unsigned lin, unsigned col);
+    ptr_peca clone() { return new Peca_Torre(*this); }
+    list<casa> &movimentos()const;
+    bool valid_move(casa CASA);
 };
 
 class Peca_Cavalo:public Peca
@@ -102,9 +133,9 @@ public:
     inline Peca_Rei(COR cor) { Peca(CAVALO,cor); }
     ~Peca_Cavalo();
 
-    virtual ptr_peca clone() { return new Peca_Cavalo(*this); }
-    bool move(unsigned lin,unsigned col);
-    bool test_move(unsigned lin, unsigned col);
+    ptr_peca clone() { return new Peca_Cavalo(*this); }
+    list<casa> &movimentos()const;
+    bool valid_move(casa CASA);
 };
 
 class Peca_Bispo:public Peca
@@ -114,9 +145,9 @@ public:
     inline Peca_Rei(COR cor) { Peca(BISPO,cor); }
     ~Peca_Bispo();
 
-    virtual ptr_peca clone() { return new Peca_Bispo(*this); }
-    bool move(unsigned lin,unsigned col);
-    bool test_move(unsigned lin, unsigned col);
+    ptr_peca clone() { return new Peca_Bispo(*this); }
+    list<casa> &movimentos()const;
+    bool valid_move(casa CASA);
 };
 
 
