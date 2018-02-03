@@ -6,6 +6,8 @@
 
 #define ERRO 666
 
+using std::list;
+
 enum TIPOPECA{VAZIO,PEAO,RAINHA,TORRE,CAVALO,BISPO,REI};
 
 enum COR{NONE,PRETO,BRANCO};
@@ -20,7 +22,7 @@ private:
     unsigned hor;
     unsigned ver;
 public:
-    casa(unsigned H,unsigned V); // coordenada invalida no jogo
+    casa(unsigned H=0,unsigned V=0):hor(H),ver(V){} // coordenada invalida no jogo
 
     unsigned getHor()const {return hor; }
     bool setHor(unsigned H);
@@ -43,8 +45,9 @@ protected:
     unsigned count_move;
 public:
     //Peca(): cor(NONE),tipo(VAZIO), count_move(0),pos(){ }
-    Peca(TIPOPECA tipo_peca): tipo(tipo_peca) {}
+    Peca(TIPOPECA tipo_peca = VAZIO): tipo(tipo_peca) {}
     Peca(TIPOPECA tipo_peca,COR cor): tipo(tipo_peca),cor(cor) {}
+
     virtual ~Peca();
 
     virtual ptr_peca clone() = 0;
@@ -70,7 +73,7 @@ public:
     //seja possivel, ou false caso contrario
     virtual bool valid_move(casa CASA)const = 0;
     //Preenche a lista de possiveis_mov
-    virtual list<casa> &movimentos()const = 0;
+    virtual list<casa> &movimentos() const = 0;
 
     inline bool operator==(TIPOPECA Peca) { return tipo == Peca; }
 
@@ -79,20 +82,21 @@ public:
 class Peca_Rei: public Peca
 {
 public:
-    inline Peca_Rei() { Peca(REI); }
-    inline Peca_Rei(COR cor) { Peca(REI,cor); }
+
+    inline Peca_Rei() :Peca(REI) { }
+    inline Peca_Rei(COR cor) : Peca(REI,cor) {}
     ~Peca_Rei();
 
     ptr_peca clone() { return new Peca_Rei(*this); }
-    list<casa> &movimentos()const;
+    list<casa> &movimentos() const{}
     bool valid_move(casa CASA);
 };
 
 class Peca_Rainha:public Peca
 {
 public:
-    inline Peca_Rainha() { Peca(RAINHA); }
-    inline Peca_Rei(COR cor) { Peca(RAINHA,cor); }
+    inline Peca_Rainha(): Peca(RAINHA) {  }
+    inline Peca_Rainha(COR cor) :Peca(RAINHA,cor){  }
     ~Peca_Rainha();
 
     ptr_peca clone() { return new Peca_Rainha(*this); }
@@ -103,8 +107,8 @@ public:
 class Peca_Peao:public Peca
 {
 public:
-    inline Peca_Peao() { Peca(PEAO); }
-    inline Peca_Rei(COR cor) { Peca(PEAO,cor); }
+    inline Peca_Peao():Peca(PEAO) {  }
+    inline Peca_Peao(COR cor):Peca(PEAO,cor) {  }
     ~Peca_Peao();
 
     void promover();
@@ -117,8 +121,8 @@ public:
 class Peca_Torre:public Peca
 {
 public:
-    inline Peca_Torre() { Peca(TORRE); }
-    inline Peca_Rei(COR cor) { Peca(TORRE,cor); }
+    inline Peca_Torre() : Peca(TORRE) {  }
+    inline Peca_Torre(COR cor) : Peca(TORRE,cor) {  }
     ~Peca_Torre();
 
     ptr_peca clone() { return new Peca_Torre(*this); }
@@ -129,8 +133,8 @@ public:
 class Peca_Cavalo:public Peca
 {
 public:
-    inline Peca_Cavalo() { Peca(CAVALO); }
-    inline Peca_Rei(COR cor) { Peca(CAVALO,cor); }
+    inline Peca_Cavalo() :Peca(CAVALO) {  }
+    inline Peca_Cavalo(COR cor) :Peca(CAVALO,cor) { }
     ~Peca_Cavalo();
 
     ptr_peca clone() { return new Peca_Cavalo(*this); }
@@ -141,8 +145,8 @@ public:
 class Peca_Bispo:public Peca
 {
 public:
-    inline Peca_Bispo() { Peca(BISPO); }
-    inline Peca_Rei(COR cor) { Peca(BISPO,cor); }
+    inline Peca_Bispo() :Peca(BISPO) {  }
+    inline Peca_Bispo(COR cor):Peca(BISPO,cor) {  }
     ~Peca_Bispo();
 
     ptr_peca clone() { return new Peca_Bispo(*this); }

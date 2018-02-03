@@ -23,7 +23,7 @@ private:
     //stack<Jogada>
 public:
     game();
-
+    
     void reiniciar();
     void novo_jogo();
     bool jogada();

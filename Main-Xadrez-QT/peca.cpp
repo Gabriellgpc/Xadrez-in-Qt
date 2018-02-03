@@ -32,6 +32,7 @@ Peca::Peca(TIPOPECA tipo, COR cor)
     this->cor = cor;
 }
 
+
 bool Peca::setPos(casa CASA)
 {
     if(lin > 8 || col > 8)
