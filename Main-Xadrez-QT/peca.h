@@ -8,9 +8,20 @@
 
 using std::list;
 
-enum TIPOPECA{VAZIO,PEAO,RAINHA,TORRE,CAVALO,BISPO,REI};
-
-enum COR{NONE,PRETO,BRANCO};
+enum TIPOPECA{
+    VAZIO = 1000,
+    PEAO = 1001,
+    RAINHA = 1002,
+    TORRE = 1003,
+    CAVALO = 1004,
+    BISPO = 1005,
+    REI = 1006
+};
+enum COR{
+    NONE = 9,
+    PRETO = 1,
+    BRANCO = 0
+};
 
 class Peca;
 typedef Peca* ptr_peca;
@@ -153,6 +164,7 @@ public:
     list<casa> &movimentos()const;
     bool valid_move(casa CASA);
 };
+
 
 
 #endif // PECA_H
