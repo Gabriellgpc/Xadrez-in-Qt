@@ -2,7 +2,6 @@
 #define PECA_H
 
 #include <list>
-#include "game.h"
 
 #define ERRO 666
 
@@ -40,10 +39,6 @@ public:
 
     unsigned getVer()const {return ver; }
     bool setVer(unsigned V);
-    /*
-    friend class Peca;
-    friend class game;
-    */
 };
 
 //classe polimorfica
@@ -61,7 +56,7 @@ public:
 
     virtual ~Peca();
 
-    virtual ptr_peca clone() = 0;
+    virtual ptr_peca clone()const = 0;
 
     inline TIPOPECA getTipo() const { return tipo; }
     inline void setTipo(TIPOPECA Tipo) { tipo = Tipo;}
@@ -83,11 +78,8 @@ public:
     //Este metodo retorna true caso o movimento da peca para a casa destino
     //seja possivel, ou false caso contrario
     virtual bool valid_move(casa CASA)const = 0;
-    //Preenche a lista de possiveis_mov
-    virtual list<casa> &movimentos() const = 0;
 
     inline bool operator==(TIPOPECA Peca) { return tipo == Peca; }
-
 };
 
 class Peca_Rei: public Peca
@@ -99,7 +91,7 @@ public:
     ~Peca_Rei();
 
     ptr_peca clone() { return new Peca_Rei(*this); }
-    list<casa> &movimentos() const{}
+
     bool valid_move(casa CASA);
 };
 
@@ -111,7 +103,7 @@ public:
     ~Peca_Rainha();
 
     ptr_peca clone() { return new Peca_Rainha(*this); }
-    list<casa> &movimentos()const;
+
     bool valid_move(casa CASA);
 };
 
@@ -125,7 +117,7 @@ public:
     void promover();
 
     ptr_peca clone() { return new Peca_Peao(*this); }
-    list<casa> &movimentos()const;
+
     bool valid_move(casa CASA);
 };
 
@@ -137,7 +129,7 @@ public:
     ~Peca_Torre();
 
     ptr_peca clone() { return new Peca_Torre(*this); }
-    list<casa> &movimentos()const;
+
     bool valid_move(casa CASA);
 };
 
@@ -149,7 +141,7 @@ public:
     ~Peca_Cavalo();
 
     ptr_peca clone() { return new Peca_Cavalo(*this); }
-    list<casa> &movimentos()const;
+
     bool valid_move(casa CASA);
 };
 
@@ -161,10 +153,9 @@ public:
     ~Peca_Bispo();
 
     ptr_peca clone() { return new Peca_Bispo(*this); }
-    list<casa> &movimentos()const;
+
     bool valid_move(casa CASA);
 };
-
 
 
 #endif // PECA_H
