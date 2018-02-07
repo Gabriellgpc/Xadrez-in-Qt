@@ -4,6 +4,7 @@
 #include <list>
 
 #define ERRO 666
+#define TAM_TAB 8
 
 using std::list;
 
@@ -22,9 +23,6 @@ enum COR{
     BRANCO = 0
 };
 
-class Peca;
-typedef Peca* ptr_peca;
-
 class casa
 {
 private:
@@ -39,7 +37,14 @@ public:
 
     unsigned getVer()const {return ver; }
     bool setVer(unsigned V);
+
+    //Testa se a casa eh valida
+    //Retorna true caso seja ou false caso contrario
+    bool is_valid();
 };
+
+class Peca;
+typedef Peca *ptr_peca;
 
 //classe polimorfica
 class Peca
@@ -53,12 +58,13 @@ public:
     //Peca(): cor(NONE),tipo(VAZIO), count_move(0),pos(){ }
     Peca(TIPOPECA tipo_peca = VAZIO): tipo(tipo_peca) {}
     Peca(TIPOPECA tipo_peca,COR cor): tipo(tipo_peca),cor(cor) {}
+    Peca(const Peca &P);
 
     virtual ~Peca();
 
-    virtual ptr_peca clone()const = 0;
+    virtual ptr_peca clone()const= 0;
 
-    inline TIPOPECA getTipo() const { return tipo; }
+    inline TIPOPECA get_Tipo() const { return tipo; }
     inline void setTipo(TIPOPECA Tipo) { tipo = Tipo;}
 
     void setCor(COR cor) { cor = cor; }
@@ -68,7 +74,7 @@ public:
     //A peca eh posicionada na posicao lin,col sem realizacao de testes
     //Retorna true se a alteracao deu certo,false caso contrario
     bool setPos(casa CASA);
-    inline casa getPos() const{ return pos; }
+    inline casa get_Pos() const{ return pos; }
 
     //Este metodo testa se a peca pode se movimentar para a casa destino
     //caso seja possivel ele retorna true e realiza o movimento, caso contrario
@@ -77,7 +83,7 @@ public:
 
     //Este metodo retorna true caso o movimento da peca para a casa destino
     //seja possivel, ou false caso contrario
-    virtual bool valid_move(casa CASA)const = 0;
+    virtual bool valid_move(casa CASA) = 0;
 
     inline bool operator==(TIPOPECA Peca) { return tipo == Peca; }
 };
@@ -85,12 +91,12 @@ public:
 class Peca_Rei: public Peca
 {
 public:
-
     inline Peca_Rei() :Peca(REI) { }
     inline Peca_Rei(COR cor) : Peca(REI,cor) {}
+
     ~Peca_Rei();
 
-    ptr_peca clone() { return new Peca_Rei(*this); }
+    ptr_peca clone() const { return new Peca_Rei(*this);}
 
     bool valid_move(casa CASA);
 };
@@ -102,7 +108,7 @@ public:
     inline Peca_Rainha(COR cor) :Peca(RAINHA,cor){  }
     ~Peca_Rainha();
 
-    ptr_peca clone() { return new Peca_Rainha(*this); }
+    ptr_peca clone() const{ return new Peca_Rainha(*this); }
 
     bool valid_move(casa CASA);
 };
@@ -116,7 +122,7 @@ public:
 
     void promover();
 
-    ptr_peca clone() { return new Peca_Peao(*this); }
+    ptr_peca clone() const{ return new Peca_Peao(*this); }
 
     bool valid_move(casa CASA);
 };
@@ -128,7 +134,7 @@ public:
     inline Peca_Torre(COR cor) : Peca(TORRE,cor) {  }
     ~Peca_Torre();
 
-    ptr_peca clone() { return new Peca_Torre(*this); }
+    ptr_peca clone() const{ return new Peca_Torre(*this); }
 
     bool valid_move(casa CASA);
 };
@@ -140,7 +146,7 @@ public:
     inline Peca_Cavalo(COR cor) :Peca(CAVALO,cor) { }
     ~Peca_Cavalo();
 
-    ptr_peca clone() { return new Peca_Cavalo(*this); }
+    ptr_peca clone() const{ return new Peca_Cavalo(*this); }
 
     bool valid_move(casa CASA);
 };
@@ -152,10 +158,9 @@ public:
     inline Peca_Bispo(COR cor):Peca(BISPO,cor) {  }
     ~Peca_Bispo();
 
-    ptr_peca clone() { return new Peca_Bispo(*this); }
+    ptr_peca clone() const{ return new Peca_Bispo(*this); }
 
     bool valid_move(casa CASA);
 };
-
 
 #endif // PECA_H

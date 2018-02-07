@@ -8,7 +8,7 @@ game::game()
 
 }
 
-void game::novo_jogo()
+void game::novo_jogo(Jogador VJ[])
 {
     /*Organizar o tabuleiro,
       mostrar escolha de peças(se for o primeiro jogo)

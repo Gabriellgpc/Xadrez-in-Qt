@@ -1,15 +1,5 @@
 #include "peca.h"
 
-casa::casa(unsigned H,unsigned V)
-{
-    if(H >= TAM_TAB || V >= TAM_TAB)
-    {
-        H = ERRO;
-        V = ERRO;
-    }
-    hor = H;
-    ver = V;
-}
 
 bool casa::setVer(unsigned V)
 {
@@ -26,38 +16,21 @@ bool casa::setHor(unsigned H)
     return true;
 }
 
-Peca::Peca(TIPOPECA tipo, COR cor)
+bool casa::is_valid()
 {
-    this->tipo = tipo;
-    this->cor = cor;
-}
-
-
-bool Peca::setPos(casa CASA)
-{
-    if(lin > 8 || col > 8)
+    if( hor >= TAM_TAB || ver >= TAM_TAB )
         return false;
-    pos[0] = lin;
-    pos[1] = col;
     return true;
 }
 
-void Peca::getPos(unsigned out_pos[])
+bool Peca::setPos(casa CASA)
 {
-    out_pos[0] = pos[0];
-    out_pos[1] = pos[1];
+    if(CASA.is_valid())
+        return false;
+    pos = CASA;
+    return true;
 }
 
-int Peca::getTipo()
-{
-    return this->tipo;
-}
-
-void Peca::setTipoCor(TIPOPECA tipo, COR cor)
-{
-    this->tipo = tipo;
-    this->cor = cor;
-}
 // Rei
 bool Peca_Rei::valid_move(casa CASA)
 {
@@ -88,6 +61,7 @@ bool Peca_Peao::valid_move(casa CASA)
 {
 
 }
+/*
 list<casa>& Peca_Peao::movimentos()const
 {
     list<casa> possiveis_mov;
@@ -117,3 +91,4 @@ list<casa>& Peca_Peao::movimentos()const
     }
     return possiveis_mov;
 }
+*/

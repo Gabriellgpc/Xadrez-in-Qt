@@ -47,6 +47,8 @@ public:
     //o metodo retorna true e o movimento eh realizado
     //caso a jogada seja invalida retorna false apenas.
     bool jogada(const casa &casa_peca,const casa &casa_destino);
+
+    xeque_mat();
 };
 
 #endif // GAME_H
