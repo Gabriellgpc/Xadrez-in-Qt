@@ -23,14 +23,20 @@ enum COR{
     BRANCO = 0
 };
 
-class casa
+class Peca;
+typedef Peca *ptr_peca;
+
+class Casa
 {
 private:
     //coordenadas
     unsigned hor;
     unsigned ver;
+    ptr_peca peca;
 public:
-    casa(unsigned H=0,unsigned V=0):hor(H),ver(V){} // coordenada invalida no jogo
+    Casa(const Casa& CASA);
+    Casa(unsigned H=0,unsigned V=0):hor(H),ver(V),peca(nullptr){} // coordenada invalida no jogo
+    ~Casa();
 
     unsigned getHor()const {return hor; }
     bool setHor(unsigned H);
@@ -38,13 +44,16 @@ public:
     unsigned getVer()const {return ver; }
     bool setVer(unsigned V);
 
-    //Testa se a casa eh valida
+    //Testa se a Casa eh valida
     //Retorna true caso seja ou false caso contrario
     bool is_valid();
-};
 
-class Peca;
-typedef Peca *ptr_peca;
+
+    void operator=(const Casa &casa);
+    inline bool empty() { return (peca == nullptr); }
+
+    friend class game;
+};
 
 //classe polimorfica
 class Peca
@@ -52,10 +61,10 @@ class Peca
 protected:
     COR cor;
     TIPOPECA tipo;
-    casa pos;//Posicao atual da peca
+    Casa pos;//Posicao atual da peca
     unsigned count_move;
 public:
-    //Peca(): cor(NONE),tipo(VAZIO), count_move(0),pos(){ }
+
     Peca(TIPOPECA tipo_peca = VAZIO): tipo(tipo_peca) {}
     Peca(TIPOPECA tipo_peca,COR cor): tipo(tipo_peca),cor(cor) {}
     Peca(const Peca &P);
@@ -73,17 +82,17 @@ public:
     //Este metodo so deve ser usado por um objeto do tipo Tabuleiro
     //A peca eh posicionada na posicao lin,col sem realizacao de testes
     //Retorna true se a alteracao deu certo,false caso contrario
-    bool setPos(casa CASA);
-    inline casa get_Pos() const{ return pos; }
+    bool setPos(Casa Casa);
+    inline Casa get_Pos() const{ return pos; }
 
-    //Este metodo testa se a peca pode se movimentar para a casa destino
+    //Este metodo testa se a peca pode se movimentar para a Casa destino
     //caso seja possivel ele retorna true e realiza o movimento, caso contrario
     //apenas retorna false
     /** virtual bool move(unsigned lin,unsigned col) = 0; */ //este metodo sera removido
 
-    //Este metodo retorna true caso o movimento da peca para a casa destino
+    //Este metodo retorna true caso o movimento da peca para a Casa destino
     //seja possivel, ou false caso contrario
-    virtual bool valid_move(casa CASA) = 0;
+    virtual bool valid_move(Casa Casa) = 0;
 
     inline bool operator==(TIPOPECA Peca) { return tipo == Peca; }
 };
@@ -98,7 +107,7 @@ public:
 
     ptr_peca clone() const { return new Peca_Rei(*this);}
 
-    bool valid_move(casa CASA);
+    bool valid_move(Casa Casa);
 };
 
 class Peca_Rainha:public Peca
@@ -110,7 +119,7 @@ public:
 
     ptr_peca clone() const{ return new Peca_Rainha(*this); }
 
-    bool valid_move(casa CASA);
+    bool valid_move(Casa Casa);
 };
 
 class Peca_Peao:public Peca
@@ -124,7 +133,7 @@ public:
 
     ptr_peca clone() const{ return new Peca_Peao(*this); }
 
-    bool valid_move(casa CASA);
+    bool valid_move(Casa Casa);
 };
 
 class Peca_Torre:public Peca
@@ -136,7 +145,7 @@ public:
 
     ptr_peca clone() const{ return new Peca_Torre(*this); }
 
-    bool valid_move(casa CASA);
+    bool valid_move(Casa Casa);
 };
 
 class Peca_Cavalo:public Peca
@@ -148,7 +157,7 @@ public:
 
     ptr_peca clone() const{ return new Peca_Cavalo(*this); }
 
-    bool valid_move(casa CASA);
+    bool valid_move(Casa Casa);
 };
 
 class Peca_Bispo:public Peca
@@ -160,7 +169,7 @@ public:
 
     ptr_peca clone() const{ return new Peca_Bispo(*this); }
 
-    bool valid_move(casa CASA);
+    bool valid_move(Casa Casa);
 };
 
 #endif // PECA_H
