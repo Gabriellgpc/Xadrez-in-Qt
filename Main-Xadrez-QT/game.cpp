@@ -1,14 +1,8 @@
 #include "game.h"
 #include <QDebug>
-game::game()
-{
-    /*
 
-    */
-
-}
 /*
-list<Casa> game::peca_move(const Casa &C) const
+list<Position> game::peca_move(const Casa &C) const
 {
     list<Casa> LC;
     if(C.peca->getCor() != jogador_da_vez)

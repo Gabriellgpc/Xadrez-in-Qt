@@ -16,7 +16,7 @@ class Jogada
 class game
 {
 private:
-    Casa Tab[TAM_TAB][TAM_TAB];
+    ptr_peca Tab[TAM_TAB][TAM_TAB];
     //OBS.: a posicao do jogador no vetor indica a cor da peca
     // 0 - BRANOCO(jogador 1), 1 - PRETO(jogador 2)
     Jogador player[MAX_PLAYER];
@@ -43,16 +43,14 @@ public:
     //ser movida.
 
     //Warning pode dar merda passar como referencia
-    list<Casa> peca_move(const Casa &C)const;//pensar em um nome melhor
+    //Caso haja uma peca do jogador da vez na posicao P
+    //retorna uma lista de movimentos possiveis para essa peca
+    list<Position> peca_move(const Position &P)const;//pensar em um nome melhor
 
     //Realiza um movimento, caso o movimento seja possivel
     //o metodo retorna true e o movimento eh realizado
     //caso a jogada seja invalida retorna false apenas.
-    bool jogada(const Casa &Casa_peca,const Casa &casa_destino);
-
-
-    //operator[](const Casa &casa);
-
+    bool jogada(const Position &pos_sorc,const Position &pos_dest);
 };
 
 #endif // GAME_H

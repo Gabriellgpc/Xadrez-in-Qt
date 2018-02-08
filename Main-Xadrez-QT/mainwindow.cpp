@@ -14,7 +14,6 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete Jogo;
 }
 
 void MainWindow::on_tabuleiroWidget_cellClicked(int row, int column)
