@@ -33,7 +33,14 @@ private:
     unsigned ver;
 public:
     Position(unsigned H, unsigned V):hor(H),ver(V) {}
-    friend class peca;
+
+    inline unsigned getHor()const { return hor; }
+    inline unsigned getVer()const { return ver; }
+
+    inline void setVer(unsigned V) { ver = V; }
+    inline void setHor(unsigned H) { hor = H; }
+
+    bool isValid();
 };
 
 //classe polimorfica
@@ -126,7 +133,6 @@ public:
     ~Peca_Cavalo();
 
     ptr_peca clone() const{ return new Peca_Cavalo(*this); }
-
     bool valid_move(Position pos_sourc,Position pos_dest);
 };
 

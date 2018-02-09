@@ -1,5 +1,12 @@
 #include "peca.h"
 
+bool Position::isValid()
+{
+    if(hor >= TAM_TAB || ver >= TAM_TAB)
+        return false;
+    return true;
+}
+
 bool Peca_Rei::valid_move(Position pos_sourc, Position pos_dest)
 {
 
@@ -13,40 +20,24 @@ bool Peca_Rainha::valid_move(Position pos_sourc, Position pos_dest)
 bool Peca_Peao::valid_move(Position pos_sourc, Position pos_dest)
 {
     int delta_H,delta_V;
-    delta_H = pos_dest.hor - pos_sourc.hor;
-    delta_V = pos_dest.ver - pos_sourc.ver;
-
-    if(delta_H > TAM_TAB || delta_V > TAM_TAB)
+    if(!pos_dest.isValid())
         return false;
-
-    switch (cor)
+    delta_H = pos_dest.getHor() - pos_sourc.getHor();
+    delta_V = pos_dest.getVer() - pos_sourc.getVer();
+    if(cor == PRETO)
     {
-    case BRANCO:
-        if(delta_H < 0 || delta_V != 0) // andar pra tras ou andar pros lados
-           return false;
-        //supondo que o tabuleiro foi iniciado de forma correta
-        if(count_move == 0)  // primeiro movimento do peao
-            if(delta_H > 2)  //andar no maximo 2 casas
-                return false;
-        if(delta_H > 1) // se n for o primeiro movimento, so pode andar 1 casa
-            return false;
-    case PRETO:
         delta_H = delta_H*-1;
         delta_V = delta_V*-1;
-
-        if(delta_H < 0 || delta_V != 0) // andar pra tras ou andar pros lados
-           return false;
-        //supondo que o tabuleiro foi iniciado de forma correta
-        if(count_move == 0)  // primeiro movimento do peao
-            if(delta_H > 2)  //andar no maximo 2 casas
-                return false;
-        if(delta_H > 1) // se n for o primeiro movimento, so pode andar 1 casa
-            return false;
-        break;
-    default:
-        return false;
-        break;
     }
+
+    if(delta_H < 0 || delta_V != 0) // andar pra tras ou andar pros lados
+      return false;
+    //supondo que o tabuleiro foi iniciado de forma correta
+    if(count_move == 0)  // primeiro movimento do peao
+        if(delta_H > 2)  //andar no maximo 2 casas
+            return false;
+    if(delta_H > 1) // se n for o primeiro movimento, so pode andar 1 casa
+        return false;
     return true;
 }
 
@@ -57,18 +48,39 @@ bool Peca_Torre::valid_move(Position pos_sourc, Position pos_dest)
 
 bool Peca_Cavalo::valid_move(Position pos_sourc, Position pos_dest)
 {
-
+    //O movimento do Cavalo eh igual independente da cor
+    //Utilizarei, para validar o movimento, um padrao simples que observei
+    //na soma das variacoes das coordenadas horizontais e verticais
+    // nota-se que delta_H + delta_V = I
+    // onde I pertence ao conjunto {-1,1,3}
+    int delta_H,delta_V;
+    int I;
+    if(!pos_dest.isValid())return false;
+    delta_H = pos_dest.getHor() - pos_sourc.getHor();
+    delta_V = pos_dest.getVer() - pos_sourc.getVer();
+    I = delta_H - delta_V;
+    if(I != -1 && I != 1 && I != 3 )
+        return false;
+    return true;
 }
 
 bool Peca_Bispo::valid_move(Position pos_sourc, Position pos_dest)
 {
-    switch (cor){
-    case BRANCO:
+    //Nota-se que para um movimento valido do Bispo
+    //temos que delta_H + delta_V = I
+    //onde I pertence ao conjunto {-6,-4,-2,0,2,3,5,7}
 
-    case PRETO:
-
-        break;
-    default:
-        break;
-    }
+    int delta_H,delta_V;
+    int I;
+    if(!pos_dest.isValid())return false;
+    delta_H = pos_dest.getHor() - pos_sourc.getHor();
+    delta_V = pos_dest.getVer() - pos_sourc.getVer();
+    I = delta_H - delta_V;
+    if(I != -6 && I != -4 && I != -2 && I != 0 && I != 2
+            && I != 3
+            && I != 5
+            && I != 7)
+        return false;
+    return true;
 }
+
