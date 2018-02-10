@@ -67,9 +67,16 @@ public:
 
     //Este metodo retorna true caso o movimento da peca para a Casa destino
     //seja possivel, ou false caso contrario
-    // H/V sour => coordenada atual da peca
-    // H/V dest => coordenada destino
-    virtual bool valid_move(Position pos_sourc,Position pos_dest) = 0;
+    // sour => coordenada atual da peca
+    // dest => coordenada destino
+    virtual bool valid_move(Position pos_sourc,Position pos_dest,
+                            const ptr_peca Tab_copy[TAM_TAB][TAM_TAB]) = 0;
+    //Este metodo retorna true caso o movimento de captura da peca na Casa destino
+    //seja possivel, ou false caso contrario
+    // sour => coordenada atual da peca
+    // dest => coordenada destino
+    virtual bool valid_cap(Position pos_sourc,Position pos_dest,
+                           const ptr_peca Tab_copy[TAM_TAB][TAM_TAB]) = 0;
 
     inline bool operator==(TIPOPECA Peca) { return tipo == Peca; }
 };
@@ -84,7 +91,10 @@ public:
 
     ptr_peca clone() const { return new Peca_Rei(*this);}
 
-    bool valid_move(Position pos_sourc,Position pos_dest);
+    bool valid_move(Position pos_sourc,Position pos_dest,
+                    const ptr_peca Tab_copy[TAM_TAB][TAM_TAB]);
+    bool valid_cap(Position pos_sourc,Position pos_dest,
+                            const ptr_peca Tab_copy[TAM_TAB][TAM_TAB]);
 };
 
 class Peca_Rainha:public Peca
@@ -96,7 +106,10 @@ public:
 
     ptr_peca clone() const{ return new Peca_Rainha(*this); }
 
-    bool valid_move(Position pos_sourc,Position pos_dest);
+    bool valid_move(Position pos_sourc,Position pos_dest,
+                            const ptr_peca Tab_copy[TAM_TAB][TAM_TAB]);
+    bool valid_cap(Position pos_sourc,Position pos_dest,
+                            const ptr_peca Tab_copy[TAM_TAB][TAM_TAB]);
 };
 
 class Peca_Peao:public Peca
@@ -110,7 +123,10 @@ public:
 
     ptr_peca clone() const{ return new Peca_Peao(*this); }
 
-    bool valid_move(Position pos_sourc,Position pos_dest);
+    bool valid_move(Position pos_sourc,Position pos_dest,
+                            const ptr_peca Tab_copy[TAM_TAB][TAM_TAB]);
+    bool valid_cap(Position pos_sourc,Position pos_dest,
+                            const ptr_peca Tab_copy[TAM_TAB][TAM_TAB]);
 };
 
 class Peca_Torre:public Peca
@@ -122,7 +138,10 @@ public:
 
     ptr_peca clone() const{ return new Peca_Torre(*this); }
 
-    bool valid_move(Position pos_sourc,Position pos_dest);
+    bool valid_move(Position pos_sourc,Position pos_dest,
+                            const ptr_peca Tab_copy[TAM_TAB][TAM_TAB]);
+    bool valid_cap(Position pos_sourc,Position pos_dest,
+                            const ptr_peca Tab_copy[TAM_TAB][TAM_TAB]);
 };
 
 class Peca_Cavalo:public Peca
@@ -133,7 +152,10 @@ public:
     ~Peca_Cavalo();
 
     ptr_peca clone() const{ return new Peca_Cavalo(*this); }
-    bool valid_move(Position pos_sourc,Position pos_dest);
+    bool valid_move(Position pos_sourc,Position pos_dest,
+                            const ptr_peca Tab_copy[TAM_TAB][TAM_TAB]);
+    bool valid_cap(Position pos_sourc,Position pos_dest,
+                            const ptr_peca Tab_copy[TAM_TAB][TAM_TAB]);
 };
 
 class Peca_Bispo:public Peca
@@ -145,7 +167,10 @@ public:
 
     ptr_peca clone() const{ return new Peca_Bispo(*this); }
 
-    bool valid_move(Position pos_sourc,Position pos_dest);
+    bool valid_move(Position pos_sourc,Position pos_dest,
+                            const ptr_peca Tab_copy[TAM_TAB][TAM_TAB]);
+    bool valid_cap(Position pos_sourc,Position pos_dest,
+                            const ptr_peca Tab_copy[TAM_TAB][TAM_TAB]);
 };
 
 #endif // PECA_H
