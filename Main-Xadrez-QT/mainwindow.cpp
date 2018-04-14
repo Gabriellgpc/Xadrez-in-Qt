@@ -5,8 +5,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    Jogo = new game();
-    Jogo->novo_jogo();
+    //Jogo = new game();
+    //Jogo->novo_jogo();
 
     ui->setupUi(this);
 }
@@ -14,5 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete Jogo;
+}
+
+void MainWindow::on_tabuleiroWidget_cellClicked(int row, int column)
+{
 }

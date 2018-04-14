@@ -16,6 +16,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void on_tabuleiroWidget_cellClicked(int row, int column);
+
 private:
     Ui::MainWindow *ui;
     game *Jogo;
